@@ -1,0 +1,29 @@
+{
+  "name": "templateengine",
+  "version": "0.0.1",
+  "description": "Templatating Engine for Nodejs",
+  "main": "index.js",
+  "scripts": {
+    "test": "NODE_PATH=./ mocha --recursive"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JordanBourne/TemplateEngine.git"
+  },
+  "keywords": [
+    "JavaScript",
+    "Template",
+    "Engine",
+    "Nodejs"
+  ],
+  "author": "Jordan Bourne",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JordanBourne/TemplateEngine/issues"
+  },
+  "homepage": "https://github.com/JordanBourne/TemplateEngine#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3"
+  }
+}
