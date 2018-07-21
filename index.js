@@ -1,22 +1,19 @@
-// const engine = require("./engine");
+const Engine = require("./engine/createEngine");
 
-// module.exports = engine;
+class TemplateEngine {
+    constructor(params) {
+        this.app = params.app;
+        this.createEngine();
+    }
 
-const fs = require("fs");
-
-function createEngine(app) {
-    app.engine("jbt", function (filepath, options, callback) {
-        fs.readFile(filepath, (err, content) => {
-            if (err) {
-                return callback(err);
-            }
-            const renderedContent = content.toString().replace("#title#", options.title);
-            return callback(null, renderedContent)
-        });
-    });
+    createEngine() {
+        let engine = Engine.create({app: this.app});
+        return engine.createEngine();
+    }
 }
 
-
 module.exports = {
-    create: createEngine
+    init: function (params) {
+        return new TemplateEngine(params);
+    }
 };
