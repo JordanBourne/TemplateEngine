@@ -1,5 +1,5 @@
 {
-  "name": "templateengine",
+  "name": "jbt-express",
   "version": "0.1.0",
   "description": "Templatating Engine for Nodejs",
   "main": "index.js",
@@ -14,16 +14,16 @@
     "JavaScript",
     "Template",
     "Engine",
-    "Nodejs"
+    "Nodejs",
+    "Express"
   ],
   "author": "Jordan Bourne",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/JordanBourne/TemplateEngine/issues"
   },
   "homepage": "https://github.com/JordanBourne/TemplateEngine#readme",
   "dependencies": {
-    "body-parser": "^1.18.3",
     "express": "^4.16.3"
   },
   "devDependencies": {
