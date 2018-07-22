@@ -33,6 +33,20 @@ describe("Lexer::", () => {
                 return done();
             });
         });
+        it("Should work with multiline content", (done) => {
+            let lexer = Lexer.create({
+                content: "<| hello |>",
+                options: {
+                    hello: multilineContent()
+                }
+            });
+
+            lexer.renderContent((err, result) => {
+                assert(!err, JSON.stringify(err));
+                expect(result).to.equal("<div id=\"testDiv\">\n        Hello World\n    </div>");
+                return done();
+            });
+        });
     });
     describe("unit tests::", () => {
         describe("parseJavaScript", () => {
@@ -128,7 +142,7 @@ describe("Lexer::", () => {
                 });
                 let tokenizedJavaScript = getHelloWorldTokenString();
 
-                expect(lexer.parseTokenedJavascript(tokenizedJavaScript)).to.equal('"Hello"+" "+"World"');
+                expect(lexer.parseTokenedJavascript(tokenizedJavaScript)).to.equal('`Hello`+" "+`World`');
             });
             it("should parse tokenized objects", () => {
                 let lexer = Lexer.create({
@@ -142,7 +156,7 @@ describe("Lexer::", () => {
                 });
                 let tokenizedJavaScript = getHelloWorldTokenObject();
 
-                expect(lexer.parseTokenedJavascript(tokenizedJavaScript)).to.equal('"Hello"+" "+"World"');
+                expect(lexer.parseTokenedJavascript(tokenizedJavaScript)).to.equal('`Hello`+" "+`World`');
             });
             it("should parse tokenized arrays", () => {
                 let lexer = Lexer.create({
@@ -153,7 +167,7 @@ describe("Lexer::", () => {
                 });
                 let tokenizedJavaScript = getHelloWorldTokenArray();
 
-                expect(lexer.parseTokenedJavascript(tokenizedJavaScript)).to.equal('"Hello World"');
+                expect(lexer.parseTokenedJavascript(tokenizedJavaScript)).to.equal('`Hello World`');
             });
         });
         it("_isAlpha", () => {
@@ -265,4 +279,10 @@ function getHelloWorldTokenArray() {
             value: "hello[0]"
         }
     ];
+}
+
+function multilineContent() {
+    return `<div id="testDiv">
+        Hello World
+    </div>`
 }

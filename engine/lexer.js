@@ -95,7 +95,7 @@ class Lexer {
         for (let i = 0; i < code.length; i++) {
             switch (code[i].token) {
                 case "variable":
-                    result.push("\"" + util.getSafeObject(this.options, code[i].value) + "\"");
+                    result.push("\`" + util.getSafeObject(this.options, code[i].value) + "\`");
                     break;
                 case "operation":
                     result.push(code[i].value);
