@@ -75,7 +75,7 @@ NPM install
 
 To verify everything is set up properly, run the tests as shown below.
 
-## Running the tests
+### Running the tests
 
 To run all the tests, in the root directory:
 
@@ -97,23 +97,11 @@ mocha --recursive -g "Lexer::"
 
 This is where the majority of the work is being done. Run these tests to verify the template is finding and parsing properly.
 
-## Built With
+### Built With
 
 * [Nodejs](https://nodejs.org/en/)
 * [Express](https://expressjs.com/)
 * [NPM](https://www.npmjs.com/)
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
-
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/jordanbourne/templateengine/tags).
-
-## Authors
-
-* **Jordan Bourne**
 
 ## License
 
