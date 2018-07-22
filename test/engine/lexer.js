@@ -55,6 +55,28 @@ describe("Lexer::", () => {
 
                 expect(lexer.parseJavaScript("2 + 2")).to.equal(4);
             });
+            it("should parse an object", () => {
+                let lexer = Lexer.create({
+                    content: "<div><| test.object |></div>",
+                    options: {
+                        test: {
+                            object: "Hello World"
+                        }
+                    }
+                });
+
+                expect(lexer.parseJavaScript("<div><| test.object |></div>")).to.equal("Hello World");
+            });
+            it("should parse an array", () => {
+                let lexer = Lexer.create({
+                    content: "<div><| test[0] |></div>",
+                    options: {
+                        test: ["Hello World"]
+                    }
+                });
+
+                expect(lexer.parseJavaScript("<div><| test[0] |></div>")).to.equal("Hello World");
+            });
         });
         describe("tokenizeJavaScript", () => {
             it("should tokenize simple JavaScript", () => {
@@ -67,21 +89,71 @@ describe("Lexer::", () => {
                 });
                 lexer.tokenizeJavaScript("hello + ' ' + world");
 
-                expect(lexer.tokenizedJavaScript).to.deep.equal(getHelloWorldToken());
+                expect(lexer.tokenizedJavaScript).to.deep.equal(getHelloWorldTokenString());
+            });
+            it("should tokenize an object", () => {
+                let lexer = Lexer.create({
+                    content: "",
+                    options: {
+                        hello: {
+                            hello: "Hello",
+                            world: "World",
+                        }
+                    }
+                });
+                lexer.tokenizeJavaScript("hello.hello + ' ' + hello.world");
+
+                expect(lexer.tokenizedJavaScript).to.deep.equal(getHelloWorldTokenObject());
+            });
+            it("should tokenize an array", () => {
+                let lexer = Lexer.create({
+                    content: "",
+                    options: {
+                        hello: ["Hello World"]
+                    }
+                });
+                lexer.tokenizeJavaScript("hello[0]");
+
+                expect(lexer.tokenizedJavaScript).to.deep.equal(getHelloWorldTokenArray());
             });
         });
         describe("parseTokenedJavascript", () => {
-            it("should parse tokenized JavaScript", () => {
+            it("should parse tokenized simple JavaScript", () => {
                 let lexer = Lexer.create({
-                    content: "<div><| hello + ' World' |></div>",
+                    content: "",
                     options: {
                         hello: "Hello",
                         world: "World"
                     }
                 });
-                let tokenizedJavaScript = getHelloWorldToken();
+                let tokenizedJavaScript = getHelloWorldTokenString();
 
                 expect(lexer.parseTokenedJavascript(tokenizedJavaScript)).to.equal('"Hello"+" "+"World"');
+            });
+            it("should parse tokenized objects", () => {
+                let lexer = Lexer.create({
+                    content: "",
+                    options: {
+                        hello: {
+                            hello: "Hello",
+                            world: "World"
+                        }
+                    }
+                });
+                let tokenizedJavaScript = getHelloWorldTokenObject();
+
+                expect(lexer.parseTokenedJavascript(tokenizedJavaScript)).to.equal('"Hello"+" "+"World"');
+            });
+            it("should parse tokenized arrays", () => {
+                let lexer = Lexer.create({
+                    content: "",
+                    options: {
+                        hello: ["Hello World"]
+                    }
+                });
+                let tokenizedJavaScript = getHelloWorldTokenArray();
+
+                expect(lexer.parseTokenedJavascript(tokenizedJavaScript)).to.equal('"Hello World"');
             });
         });
         it("_isAlpha", () => {
@@ -136,7 +208,7 @@ describe("Lexer::", () => {
     });
 });
 
-function getHelloWorldToken() {
+function getHelloWorldTokenString() {
     return [
         {
             token: "variable",
@@ -157,6 +229,40 @@ function getHelloWorldToken() {
         {
             token: "variable",
             value: "world"
+        }
+    ];
+}
+
+function getHelloWorldTokenObject() {
+    return [
+        {
+            token: "variable",
+            value: "hello.hello"
+        },
+        {
+            token: "operation",
+            value: "+"
+        },
+        {
+            token: "string",
+            value: " "
+        },
+        {
+            token: "operation",
+            value: "+"
+        },
+        {
+            token: "variable",
+            value: "hello.world"
+        }
+    ];
+}
+
+function getHelloWorldTokenArray() {
+    return [
+        {
+            token: "variable",
+            value: "hello[0]"
         }
     ];
 }

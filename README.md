@@ -37,12 +37,13 @@ function renderTitle (req, res, next) {
 ## Features
 
 *Currently Supported*
-* Simple passed in from Options
+* Simple variables passed in from Options
 * Simple operations such as string and number arithmetic
+* Support for Objects and Arrays within Options
 
 *To Be Added*
-* Support for Objects and Arrays within Options
-* Declaring and updating variables within .jbt file
+* Declaring and updating variables within scope of .jbt file
+* Loops and conditionals
 
 ## How To Contribute
 
@@ -102,10 +103,6 @@ This is where the majority of the work is being done. Run these tests to verify 
 * [Nodejs](https://nodejs.org/en/)
 * [Express](https://expressjs.com/)
 * [NPM](https://www.npmjs.com/)
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Versioning
 
