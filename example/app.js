@@ -7,7 +7,7 @@ const jbt = require("../index");
 const routes = require("./routes");
 
 /**** Creates jbt engine ****/
-jbt.create({app});
+jbt.init({app});
 
 /**** Load in routes from routes.js and sets base url to /test ****/
 app.use("/test", routes);

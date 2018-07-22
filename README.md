@@ -15,6 +15,8 @@ Then in the file your express app is set up in, add these three lines (assuming 
 ```
 const jbt = require("jbt-express");
 
+jbt.init({app});
+
 app.set("view engine", "jbt");
 app.set("views", "./views");
 ```
