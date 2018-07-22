@@ -1,13 +1,13 @@
 # Project Title
 
-One Paragraph of project description goes here
+JBT-Express is an open-source templating engine for Express.js
 
 ## Installation
 
-To install &PROJECTNAME& first run
+To install jbt-express first run:
 
 ```
-npm insall --save &PROJECTNAME&
+npm insall --save jbt-express
 ```
 
 Then in the file your express app is set up in, add these three lines (assuming `app = express()` was set earlier)
