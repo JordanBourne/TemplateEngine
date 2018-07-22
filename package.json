@@ -1,6 +1,6 @@
 {
   "name": "jbt-express",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "Templatating Engine for Nodejs",
   "main": "index.js",
   "scripts": {
