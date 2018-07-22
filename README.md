@@ -13,7 +13,7 @@ npm insall --save jbt-express
 Then in the file your express app is set up in, add these three lines (assuming `app = express()` was set earlier)
 
 ```
-const jbt = require("../index");
+const jbt = require("jbt-express");
 
 app.set("view engine", "jbt");
 app.set("views", "./views");
