@@ -10,7 +10,7 @@ const express = require("express");
 const app = express();
 const router = express.Router();
 
-describe("Engine::", () => {
+describe("E2E::", () => {
     let server;
 
     beforeEach(() => {

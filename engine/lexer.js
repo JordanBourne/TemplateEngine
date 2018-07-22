@@ -46,7 +46,6 @@ class Lexer {
     }
 
     parseJavaScript(phrase) {
-        //hello + ' ' + world
         this.tokenizeJavaScript(phrase);
         this.parseTokenedJavascript();
         return eval(this.parseTokenedJavascript());
