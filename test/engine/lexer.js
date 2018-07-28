@@ -59,7 +59,7 @@ describe("Lexer::", () => {
                     }
                 });
 
-                expect(lexer.parseJavaScript("hello + ' ' + world")).to.equal("Hello World");
+                expect(lexer.parseJavaScript("hello + ' ' + world")).to.equal("|hello| |world|");
             });
             it("should parse addition", () => {
                 let lexer = Lexer.create({
@@ -79,7 +79,7 @@ describe("Lexer::", () => {
                     }
                 });
 
-                expect(lexer.parseJavaScript("<div><| test.object |></div>")).to.equal("Hello World");
+                expect(lexer.parseJavaScript("<div><| test.object |></div>")).to.equal("|test.object|");
             });
             it("should parse an array", () => {
                 let lexer = Lexer.create({
@@ -89,7 +89,7 @@ describe("Lexer::", () => {
                     }
                 });
 
-                expect(lexer.parseJavaScript("<div><| test[0] |></div>")).to.equal("Hello World");
+                expect(lexer.parseJavaScript("<div><| test[0] |></div>")).to.equal("|test[0]|");
             });
         });
         describe("tokenizeJavaScript", () => {
@@ -142,7 +142,7 @@ describe("Lexer::", () => {
                 });
                 let tokenizedJavaScript = getHelloWorldTokenString();
 
-                expect(lexer.parseTokenedJavascript(tokenizedJavaScript)).to.equal('`Hello`+" "+`World`');
+                expect(lexer.parseTokenedJavascript(tokenizedJavaScript)).to.equal('"|hello|"+" "+"|world|"');
             });
             it("should parse tokenized objects", () => {
                 let lexer = Lexer.create({
@@ -156,7 +156,7 @@ describe("Lexer::", () => {
                 });
                 let tokenizedJavaScript = getHelloWorldTokenObject();
 
-                expect(lexer.parseTokenedJavascript(tokenizedJavaScript)).to.equal('`Hello`+" "+`World`');
+                expect(lexer.parseTokenedJavascript(tokenizedJavaScript)).to.equal('"|hello.hello|"+" "+"|hello.world|"');
             });
             it("should parse tokenized arrays", () => {
                 let lexer = Lexer.create({
@@ -167,7 +167,7 @@ describe("Lexer::", () => {
                 });
                 let tokenizedJavaScript = getHelloWorldTokenArray();
 
-                expect(lexer.parseTokenedJavascript(tokenizedJavaScript)).to.equal('`Hello World`');
+                expect(lexer.parseTokenedJavascript(tokenizedJavaScript)).to.equal('"|hello[0]|"');
             });
         });
         it("_isAlpha", () => {

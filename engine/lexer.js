@@ -6,11 +6,13 @@ class Lexer {
         this.content = params.content.toString();
         this.options = params.options;
         this.parsedContent = [];
+        this.variables = [];
     }
 
     renderContent(callback) {
         this.tokenizePage();
         this.parsePageTokens();
+        this.replaceVariables();
         return callback(null, this.parsedContent);
     }
 
@@ -95,7 +97,8 @@ class Lexer {
         for (let i = 0; i < code.length; i++) {
             switch (code[i].token) {
                 case "variable":
-                    result.push("\`" + util.getSafeObject(this.options, code[i].value) + "\`");
+                    this.variables.push(code[i].value);
+                    result.push(`"|${code[i].value}|"`);
                     break;
                 case "operation":
                     result.push(code[i].value);
@@ -113,6 +116,15 @@ class Lexer {
 
         this.reconstructedJavaScript = result.join("");
         return this.reconstructedJavaScript;
+    }
+
+    replaceVariables() {
+        this.variables.forEach((variable) => {
+            this.parsedContent = this.parsedContent.replace(
+                this._regex(variable),
+                util.getSafeObject(this.options, variable)
+            );
+        })
     }
 
     _isAlpha(char) {
@@ -134,6 +146,16 @@ class Lexer {
     _isSymbol(char) {
         let symbols = ["+","-","*","/","="];
         return symbols.includes(char);
+    }
+
+    _regex(input) {
+        input = "\|" + input + "\|"
+        input = this._regexEscape(input);
+        return new RegExp("(" + input + ")", 'g');
+    }
+
+    _regexEscape(str) {
+        return str.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')
     }
 }
 
