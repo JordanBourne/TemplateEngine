@@ -1,4 +1,4 @@
-# Project Title
+# JBT-Express
 
 JBT-Express is an open-source templating engine for Express.js
 
